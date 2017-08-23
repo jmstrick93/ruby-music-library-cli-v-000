@@ -186,7 +186,6 @@ describe "CLI Methods" do
       expect($stdout).to_not receive(:puts)
 
       music_library_controller.play_song
-      binding.pry
     end
   end
 end

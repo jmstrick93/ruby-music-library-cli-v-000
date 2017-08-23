@@ -16,11 +16,28 @@ class MusicLibraryController
     puts "To quit, type 'exit'."
     puts "What would you like to do?"
 
-    input = gets.strip
+    input = nil
 
-    while input != 'exit'
+    while input != "exit"
       input = gets.strip
+      case input
+      when "list songs"
+        self.list_songs
+      when "list artists"
+        self.list_artists
+      when "list genres"
+        self.list_genres
+      when "list artist"
+        self.list_songs_by_artist
+      when "list genre"
+        self.list_songs_by_genre
+      when "play song"
+        self.play_song
+      end
     end
+
+
+
 
   end
 
@@ -80,7 +97,6 @@ class MusicLibraryController
     if selection > 0 && selection <= song_array.length
       puts "Playing #{song_array[selection-1].name} by #{song_array[selection-1].artist.name}"
     end
-    binding.pry
 
   end
 
