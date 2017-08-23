@@ -1,5 +1,4 @@
 class MusicLibraryController
-
   # attr_accessor :path
 
   def initialize(path = './db/mp3s')
@@ -23,11 +22,42 @@ class MusicLibraryController
       input = gets.strip
     end
 
-
-
-
-
   end
 
+  def list_songs
+    alpha_array = Song.all.sort{|a,b| a.name.downcase <=> b.name.downcase}
+
+    alpha_array.each.with_index(1) do |song, index|
+      puts "#{index}. #{song.artist.name} - #{song.name} - #{song.genre.name}"
+    end
+  end
+
+  def list_artists
+    alpha_array = Artist.all.sort{|a,b| a.name.downcase <=> b.name.downcase}
+
+    alpha_array.each.with_index(1) do |artist, index|
+      puts "#{index}. #{artist.name}"
+    end
+  end
+
+  def list_genres
+    alpha_array = Genre.all.sort{|a,b| a.name.downcase <=> b.name.downcase}
+
+    alpha_array.each.with_index(1) do |genre, index|
+      puts "#{index}. #{genre.name}"
+    end
+  end
+
+  def list_songs_by_artist
+    puts "Please enter the name of an artist:"
+    entered_name = gets.strip
+    songs = []
+    Song.all.each {|song| songs << song if song.artist.name == entered_name}
+    songs.sort!{|a,b| a.name.downcase <=> b.name.downcase}
+    songs.each.with_index(1) do |song, index|
+      puts "#{index}. #{song.name} - #{song.genre.name}"
+    end
+
+  end
 
 end
